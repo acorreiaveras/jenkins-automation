@@ -8,7 +8,10 @@ pipeline {
     }
     stage('Docker build') {
       steps {
-        build 'docker.build(\'smartcheck-registry\')'
+        script {
+          docker.build('smartcheck-registry')
+        }
+
       }
     }
   }
