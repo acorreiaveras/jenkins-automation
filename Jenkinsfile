@@ -18,7 +18,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-            docker.image('smartcheck-registry').push('jenkins-test1') }
+            docker.image('smartcheck-registry').push('vulnerable') }
           }
 
         }
