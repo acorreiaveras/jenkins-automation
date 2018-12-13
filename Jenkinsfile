@@ -25,7 +25,9 @@ pipeline {
       }
       stage('Smartcheck') {
         steps {
-          sh 'python /home/ec2-user/scAPI.py'
+          sh '''whoami
+python /home/ec2-user/scAPI.py
+'''
         }
       }
     }
