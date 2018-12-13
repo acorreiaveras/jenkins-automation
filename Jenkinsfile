@@ -25,7 +25,7 @@ pipeline {
       }
       stage('Smartcheck') {
         steps {
-          sh 'python scAPI.py'
+          echo 'Smartcheck'
         }
       }
     }
