@@ -1,1 +1,1 @@
-Testing jenkins webhook 2
+Testing jenkins automation with Smartcheck
