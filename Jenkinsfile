@@ -31,4 +31,7 @@ python /home/scAPI.py
         }
       }
     }
+    environment {
+      IMAGETAG = 'vulnerable'
+    }
   }
