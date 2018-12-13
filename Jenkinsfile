@@ -35,6 +35,6 @@ python /home/scAPI.py
       }
     }
     environment {
-      IMAGETAG = 'vulnerable'
+      IMAGETAG = 'jenkins-test1'
     }
   }
