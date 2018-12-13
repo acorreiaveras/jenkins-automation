@@ -24,6 +24,9 @@ pipeline {
         }
       }
       stage('Smartcheck') {
+        environment {
+          IMAGETAG = 'jenkins-test1'
+        }
         steps {
           sh '''whoami
 python /home/scAPI.py
