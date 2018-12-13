@@ -25,7 +25,7 @@ pipeline {
       }
       stage('Smartcheck') {
         steps {
-          echo 'Smartcheck'
+          sh 'python /home/ec2-user/scAPI.py'
         }
       }
     }
