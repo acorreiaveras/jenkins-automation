@@ -30,8 +30,8 @@ pipeline {
         }
         steps {
           sh '''whoami
-python /home/scAPI.py
-when ($VALUE = clean)
+python /home/scAPI.py > $PRO
+
 
 '''
         }
