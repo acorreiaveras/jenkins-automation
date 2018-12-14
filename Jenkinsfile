@@ -29,8 +29,7 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''response=$(python scAPI.py)
-echo response
+          sh '''python scAPI.py
 
 
 '''
