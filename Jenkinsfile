@@ -34,10 +34,16 @@ echo $VALUE
 echo "VALUE is $VALUE"
 if [[ "$VALUE" = "1" ]]; then
    echo "confirmed"
-   docker.withRegistry(\'https://102212442704.dkr.ecr.us-west-1.amazonaws.com\', \'ecr:us-west-1:demo-ecr-credentials\') {
-            docker.image(\'smartcheck-registry\').push(\'ifentry\') }
 fi
 '''
+          script {
+            if (env.VALUE == '1') {
+              echo 'I only execute on the master branch'
+            } else {
+              echo 'I execute elsewhere'
+            }
+          }
+
         }
       }
     }
