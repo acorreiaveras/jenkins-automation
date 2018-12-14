@@ -26,10 +26,11 @@ pipeline {
       stage('Smartcheck') {
         environment {
           IMAGETAG = 'jenkins-test1'
+          VALUE = ''
         }
         steps {
           sh '''whoami
-python /home/scAPI.py 
+export VALUE=$(python /home/scAPI.py)
 '''
         }
       }
