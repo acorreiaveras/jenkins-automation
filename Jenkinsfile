@@ -31,7 +31,7 @@ pipeline {
         steps {
           sh '''export VALUE=$(python /home/scAPI.py)
 echo $VALUE
-'''
+echo "VALUE is $VALUE"'''
         }
       }
     }
