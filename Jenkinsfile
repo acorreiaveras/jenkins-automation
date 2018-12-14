@@ -29,7 +29,7 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''python scAPI.py
+          sh '''python /home/scAPI.py
 
 '''
         }
