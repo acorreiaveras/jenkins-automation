@@ -29,10 +29,10 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''whoami
-python /home/scAPI.py
-
-
+          sh '''export VALUE=$(python scAPI.py)
+if [[ "${VALUE}" == "1" ]]
+echo "entrou no if"
+fi
 '''
         }
       }
