@@ -30,8 +30,8 @@ pipeline {
         }
         steps {
           script {
-            env.VALUE = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
-            echo env.VALUE
+            $VALUE = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
+            echo $VALUE
           }
 
         }
