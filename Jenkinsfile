@@ -29,10 +29,10 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''export VALUE=$(python scAPI.py)
-if [[ "${VALUE}" == "1" ]]
-echo "entrou no if"
-fi
+          sh '''response=$(python scAPI.py)
+echo response
+
+
 '''
         }
       }
