@@ -31,7 +31,11 @@ pipeline {
         steps {
           sh '''export VALUE=$(python /home/scAPI.py)
 echo $VALUE
-echo "VALUE is $VALUE"'''
+echo "VALUE is $VALUE"
+if [VALUE is \'1\']; then
+  echo "no if"
+fi
+'''
         }
       }
     }
