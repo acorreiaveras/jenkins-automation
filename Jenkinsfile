@@ -29,8 +29,8 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''python /home/scAPI.py
-
+          sh '''export VALUE=$(python /home/scAPI.py)
+echo $VALUE
 '''
         }
       }
