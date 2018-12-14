@@ -31,8 +31,8 @@ pipeline {
         steps {
           script {
             VALUE = sh'python /home/scAPI.py'
-            echo VALUE
-            if (VALUE == 1) {
+            echo $VALUE
+            if ($(VALUE) == 1) {
               echo 'I only execute on the master branch'
             } else {
               echo 'I execute elsewhere'
