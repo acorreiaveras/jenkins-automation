@@ -35,6 +35,7 @@ echo "VALUE is $VALUE"
 if [[ "$VALUE" = "1" ]]; then
    echo "confirmed"
 fi
+environment name: \'VALUE\', value: \'value\'
 '''
           script {
             if (env.VALUE == '1') {
