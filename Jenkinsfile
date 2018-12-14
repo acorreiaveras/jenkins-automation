@@ -30,7 +30,9 @@ pipeline {
         }
         steps {
           sh '''whoami
-export VALUE=$(python /home/scAPI.py)
+python /home/scAPI.py
+when ($VALUE = clean)
+
 '''
         }
       }
