@@ -30,7 +30,7 @@ pipeline {
         }
         steps {
           script {
-            VALUE = sh'export VALUE=$(python /home/scAPI.py)'
+            VALUE = sh'python /home/scAPI.py'
             if (env.VALUE == '1') {
               echo 'I only execute on the master branch'
             } else {
