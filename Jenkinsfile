@@ -29,22 +29,8 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''export VALUE=$(python /home/scAPI.py)
-echo $VALUE
-echo "VALUE is $VALUE"
-if [[ "$VALUE" = "1" ]]; then
-   echo "confirmed"
-fi
-environment name: \'VALUE\', value: \'value\'
+          sh '''python /home/scAPI.py
 '''
-          script {
-            if (env.VALUE == '1') {
-              echo 'I only execute on the master branch'
-            } else {
-              echo 'I execute elsewhere'
-            }
-          }
-
         }
       }
     }
