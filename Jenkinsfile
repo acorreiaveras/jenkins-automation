@@ -32,12 +32,18 @@ pipeline {
           script {
             $VALUE = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
             echo $VALUE
-          }
+            if ($VALUE == '1') {
+              docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                docker.image('smartcheck-registry').push('newtag') }
+              } else {
+                echo 'I execute elsewhere'
+              }
+            }
 
+          }
         }
       }
+      environment {
+        IMAGETAG = 'jenkins-test1'
+      }
     }
-    environment {
-      IMAGETAG = 'jenkins-test1'
-    }
-  }
