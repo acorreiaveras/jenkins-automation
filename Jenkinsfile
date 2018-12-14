@@ -29,8 +29,8 @@ pipeline {
           VALUE = ''
         }
         steps {
-          sh '''if [[($python scAPI.py) == \'clean\']]
-echo \'done\'
+          sh '''if [[($python scAPI.py) == \'clean\']]; then
+   echo \'done\'
 fi
 
 
