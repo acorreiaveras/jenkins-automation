@@ -30,7 +30,7 @@ pipeline {
         }
         steps {
           sh '''whoami
-VAR = python /home/scAPI.py
+python /home/scAPI.py
 
 
 '''
