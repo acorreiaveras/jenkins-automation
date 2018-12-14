@@ -29,7 +29,7 @@ pipeline {
         }
         steps {
           sh '''whoami
-python /home/scAPI.py
+python /home/scAPI.py 
 '''
         }
       }
