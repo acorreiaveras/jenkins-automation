@@ -41,7 +41,7 @@ pipeline {
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                   docker.image('sc-quarantined').push('image-test') }
                 }
-                sh 'docker rmi $(docker images -a -q) -f'
+                sh 'docker rmi $(docker images -a -q) -f 2> /dev/null'
               }
 
             }
