@@ -14,36 +14,34 @@ pipeline {
 
       }
     }
-    stage('Docker push') {
+    stage('ECR push') {
       steps {
         script {
           docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-            docker.image('smartcheck-registry').push('vulnerable') }
+            docker.image('smartcheck-registry').push($IMAGETAG) }
           }
 
         }
       }
       stage('Smartcheck') {
-        environment {
-          IMAGETAG = 'jenkins-test1'
-          VALUE = ''
-        }
         steps {
           script {
-            $VALUE = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
+            $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
             echo $VALUE
-            if ($VALUE == '1') {
-              docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                docker.image('smartcheck-registry').push('newtag') }
+            if ($FLAG == '1') {
+              docker.withRegistry('102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                docker.image('sc-blessed').push($IMAGETAG) }
               } else {
                 echo 'I execute elsewhere'
+                docker.withRegistry('102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                  docker.image('sc-quarantined').push($IMAGETAG) }
+                }
               }
-            }
 
+            }
           }
         }
+        environment {
+          IMAGETAG = 'image-test'
+        }
       }
-      environment {
-        IMAGETAG = 'jenkins-test1'
-      }
-    }
