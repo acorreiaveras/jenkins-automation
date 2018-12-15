@@ -32,12 +32,12 @@ pipeline {
             $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
             echo $FLAG
             if ($FLAG == '1') {
-              docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com/sc-blessed', 'ecr:us-west-1:demo-ecr-credentials') {
-                docker.image('smartcheck-registry').push('image-test') }
+              docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                docker.image('sc-blessed').push('image-test') }
               } else {
                 echo 'I execute elsewhere'
-                docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com/sc-quarantined', 'ecr:us-west-1:demo-ecr-credentials') {
-                  docker.image('smartcheck-registry').push('image-test') }
+                docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                  docker.image('sc-quarantined').push('image-test') }
                 }
               }
 
