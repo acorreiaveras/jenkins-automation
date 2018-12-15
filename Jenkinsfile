@@ -30,7 +30,7 @@ pipeline {
         steps {
           script {
             $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
-            echo $VALUE
+            echo $FLAG
             if ($FLAG == '1') {
               docker.withRegistry('102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                 docker.image('sc-blessed').push('image-test') }
