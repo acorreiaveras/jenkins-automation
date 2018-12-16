@@ -45,5 +45,10 @@ pipeline {
         }
         environment {
           IMAGETAG = 'test6'
+          HIGH = '5'
+          MEDIUM = '5'
+          LOW = '5'
+          NEGLIGIBLE = '5'
+          UNKNOWN = '5'
         }
       }
