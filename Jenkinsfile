@@ -10,8 +10,6 @@ pipeline {
       steps {
         script {
           docker.build('smartcheck-registry')
-
-          env.TESTE = "NEWVALUE"
         }
 
       }
@@ -40,9 +38,6 @@ pipeline {
                   docker.image('sc-quarantined').push(env.IMAGETAG) }
                 }
                 sh 'docker rmi $(docker images -q) -f 2> /dev/null'
-
-
-                echo env.TESTE
               }
 
             }
@@ -50,6 +45,5 @@ pipeline {
         }
         environment {
           IMAGETAG = 'test6'
-          TESTE = 'valor'
         }
       }
