@@ -34,12 +34,12 @@ pipeline {
             if ($FLAG == '1') {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                docker.image('sc-blessed').push('image-test') }
+                docker.image('sc-blessed').push('test') }
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 echo 'I execute elsewhere'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                  docker.image('sc-quarantined').push('image-test') }
+                  docker.image('sc-quarantined').push('test') }
                 }
               }
 
