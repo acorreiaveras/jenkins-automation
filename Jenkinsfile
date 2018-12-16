@@ -18,7 +18,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-            docker.image('smartcheck-registry').push('image-test') }
+            docker.image('smartcheck-registry').push('image-test')}
           }
 
         }
@@ -34,12 +34,12 @@ pipeline {
             if ($FLAG == '1') {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                docker.image('sc-blessed').push('image-test'+ new Date()) }
+                docker.image('sc-blessed').push('image-test') }
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 echo 'I execute elsewhere'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                  docker.image('sc-quarantined').push('image-test'+ new Date()) }
+                  docker.image('sc-quarantined').push('image-test') }
                 }
               }
 
