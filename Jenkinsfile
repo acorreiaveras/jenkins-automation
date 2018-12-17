@@ -44,7 +44,7 @@ pipeline {
         }
         environment {
           IMAGETAG = 'tomcat'
-          HIGH = '5'
+          HIGH = '1'
           MEDIUM = '5'
           LOW = '5'
           NEGLIGIBLE = '5'
