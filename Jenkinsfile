@@ -26,18 +26,29 @@ pipeline {
       stage('Smartcheck') {
         steps {
           script {
-            sh 'python /home/scAPI.py'
-          }
+            $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
+            echo $FLAG
+            if ($FLAG == '1') {
+              sh 'docker tag smartcheck-registry sc-blessed'
+              docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                docker.image('sc-blessed').push(env.IMAGETAG) }
+              } else {
+                sh 'docker tag smartcheck-registry sc-quarantined'
+                docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
+                  docker.image('sc-quarantined').push(env.IMAGETAG) }
+                }
+                sh 'docker rmi $(docker images -q) -f 2> /dev/null'
+              }
 
+            }
+          }
+        }
+        environment {
+          IMAGETAG = 'tomcat'
+          HIGH = '1'
+          MEDIUM = '5'
+          LOW = '5'
+          NEGLIGIBLE = '5'
+          UNKNOWN = '5'
         }
       }
-    }
-    environment {
-      IMAGETAG = 'tomcat'
-      HIGH = '1'
-      MEDIUM = '5'
-      LOW = '5'
-      NEGLIGIBLE = '5'
-      UNKNOWN = '5'
-    }
-  }
