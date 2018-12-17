@@ -17,9 +17,8 @@ pipeline {
     stage('ECR push') {
       steps {
         script {
-          echo env.GIT_COMMIT
           docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-            docker.image('smartcheck-registry').push(env.IMAGETAG)}
+            docker.image('smartcheck-registry').push(env.IMAGETAG+'-'+env.BUILD_ID)}
           }
 
         }
@@ -31,11 +30,11 @@ pipeline {
             if ($FLAG == '1') {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                docker.image('sc-blessed').push(env.IMAGETAG) }
+                docker.image('sc-blessed').push(env.IMAGETAG+'-'+env.BUILD_ID) }
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
-                  docker.image('sc-quarantined').push(env.IMAGETAG) }
+                  docker.image('sc-quarantined').push(env.IMAGETAG+'-'+env.BUILD_ID) }
                 }
                 sh 'docker rmi $(docker images -q) -f 2> /dev/null'
               }
