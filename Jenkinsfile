@@ -33,10 +33,10 @@ pipeline {
                 docker.image('sc-blessed').push(env.IMAGETAG) }
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
-                echo 'I execute elsewhere'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                   docker.image('sc-quarantined').push(env.IMAGETAG) }
                 }
+                sh 'docker rmi $(docker images -q) -f 2> /dev/null'
               }
 
             }
