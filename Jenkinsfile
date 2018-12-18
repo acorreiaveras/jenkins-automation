@@ -49,5 +49,7 @@ pipeline {
           LOW = '5'
           NEGLIGIBLE = '5'
           UNKNOWN = '5'
+          USER = 'administrator'
+          PASSWORD = 'trendmicro'
         }
       }
