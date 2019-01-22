@@ -31,6 +31,8 @@ pipeline {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                 docker.image('sc-blessed').push(env.IMAGETAG+'-'+env.BUILD_ID) }
+                sh 'helm install --name=myapp ../myapp --set image.repository={{ env.REPOSITORY }} --set image.tag={{ env.IMAGETAG }}'
+
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
@@ -51,5 +53,6 @@ pipeline {
           UNKNOWN = '5'
           USER = 'administrator'
           PASSWORD = 'trendmicro'
+          REPOSITORY = '102212442704.dkr.ecr.us-west-1.amazonaws.com/sc-blessed'
         }
       }
