@@ -31,6 +31,8 @@ pipeline {
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
+            sh 'kubectl config --kubeconfig=/home/.kube/config'
+
             sh 'kubectl get nodes --all-namespaces --v=99'
           }
 
