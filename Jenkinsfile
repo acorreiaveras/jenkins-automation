@@ -31,7 +31,7 @@ pipeline {
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
-            sh "ansible-playbook /var/lib/jenkins/ansible/sayarapp-deploy/deploy.yml  --user=jenkins --extra-vars ImageName=${env.REPOSITORY} --extra-vars imageTag=${env.IMAGETAG} --extra-vars Namespace=${env.NAMESPACE}"
+            sh "ansible-playbook /var/lib/jenkins/sayarapp-deploy/deploy.yml  --user=jenkins --extra-vars ImageName=${env.REPOSITORY} --extra-vars imageTag=${env.IMAGETAG} --extra-vars Namespace=${env.NAMESPACE}"
           }
 
         }
