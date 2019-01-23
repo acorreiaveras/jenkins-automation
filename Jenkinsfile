@@ -26,12 +26,12 @@ pipeline {
       stage('Smartcheck') {
         steps {
           script {
-            env.PATH = "/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
+            env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
             env.KUBECONFIG = "/home/.kube/config"
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
-            sh 'kubectl get all --v=99'
+            sh "ansible-playbook /var/lib/jenkins/ansible/sayarapp-deploy/deploy.yml  --user=jenkins --extra-vars ImageName=${env.REPOSITORY} --extra-vars imageTag=${env.IMAGETAG} --extra-vars Namespace=${env.NAMESPACE}"
           }
 
         }
