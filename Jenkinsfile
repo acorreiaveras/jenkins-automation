@@ -28,6 +28,7 @@ pipeline {
           script {
             env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
             print env.PATH
+            sh 'kubectl get pods'
             sh 'helm list --kubeconfig /home/.kube/config'
           }
 
