@@ -27,6 +27,7 @@ pipeline {
         steps {
           script {
             env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
+            env.KUBECONFIG = "/home/.kube/config"
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
