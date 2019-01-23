@@ -26,7 +26,7 @@ pipeline {
       stage('Smartcheck') {
         steps {
           script {
-            env.PATH = "/home/bin:${env.PATH}"
+            env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
             print env.PATH
 
             $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
