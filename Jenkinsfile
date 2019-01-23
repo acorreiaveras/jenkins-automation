@@ -28,7 +28,7 @@ pipeline {
           script {
             env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
             print env.PATH
-            sh 'helm list --kubeconfig /home/.kube/config' ec2-user
+            sh 'helm list --kubeconfig /home/.kube/config' -u ec2-user
           }
 
         }
