@@ -26,6 +26,7 @@ pipeline {
       stage('Smartcheck') {
         steps {
           script {
+            env.PATH = "/home/ec2-user/bin/aws-iam-authenticator:${env.PATH}"
             $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
             if ($FLAG == '1') {
               sh 'docker tag smartcheck-registry sc-blessed'
