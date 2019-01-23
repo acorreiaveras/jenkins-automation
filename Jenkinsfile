@@ -30,7 +30,7 @@ pipeline {
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
-            sh 'helm list --kubeconfig /home/.kube/config --tiller-namespace kube-system'
+            sh 'kubectl get nodes'
           }
 
         }
