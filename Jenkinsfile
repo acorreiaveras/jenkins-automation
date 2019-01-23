@@ -31,7 +31,7 @@ pipeline {
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
-            sh 'kubectl apply -f /home/deployapp/myapp/templates/deployment.yaml'
+            sh 'kubectl apply -f /home/deployapp/myapp/templates/deployment.yaml --v=99'
           }
 
         }
