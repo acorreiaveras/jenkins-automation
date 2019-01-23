@@ -29,6 +29,7 @@ pipeline {
             env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
             print env.PATH
             sh 'aws sts get-caller-identity'
+            sh 'aws-iam-authenticator token -i eks-deploy'
             sh 'helm list --kubeconfig /home/.kube/config'
           }
 
