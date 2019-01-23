@@ -28,7 +28,7 @@ pipeline {
           script {
             env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
             print env.PATH
-            sh 'kubectl get nodes'
+            sh 'kubectl get nodes --all-namespaces '
             sh 'helm list --kubeconfig /home/.kube/config'
           }
 
