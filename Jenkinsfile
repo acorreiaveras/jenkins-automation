@@ -26,6 +26,7 @@ pipeline {
       stage('Smartcheck') {
         steps {
           script {
+            env.PATH = "/home/ec2-user/bin/aws-iam-authenticator:${env.PATH}"
             print env.PATH
           }
 
