@@ -28,7 +28,7 @@ pipeline {
           script {
             env.PATH = "/usr/local/bin:/home/bin:${env.PATH}"
             print env.PATH
-            sh 'kubectl get svc '
+            sh 'aws sts get-caller-identity'
             sh 'helm list --kubeconfig /home/.kube/config'
           }
 
