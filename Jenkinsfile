@@ -31,7 +31,7 @@ pipeline {
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
-            sh 'AWS_PROFILE=amandav kubectl get nodes'
+            sh 'AWS_PROFILE=jenkins-amanda-role kubectl get nodes'
           }
 
         }
