@@ -26,7 +26,7 @@ pipeline {
       stage('Smartcheck') {
         steps {
           script {
-            sh 'helm install --name=newmyapp /home/myapp --set image.repository=$env.REPOSITORY --set image.tag=$env.NAME'
+            sh '/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=$env.REPOSITORY --set image.tag=$env.NAME'
           }
 
         }
