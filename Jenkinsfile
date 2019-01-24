@@ -35,7 +35,7 @@ pipeline {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                 docker.image('sc-blessed').push(env.IMAGETAG+'-'+env.BUILD_ID) }
-                sh 'helm upgrade --wait --recreate-pods tomcat-svc /home/myapp --set image.repository=env.REPOSITORY --set image.tag=env.NAME'
+                sh 'helm upgrade --wait --recreate-pods myapp /home/myapp --set image.repository=env.REPOSITORY --set image.tag=env.NAME'
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
