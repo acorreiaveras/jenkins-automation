@@ -31,7 +31,7 @@ pipeline {
             print env.PATH
             sh 'aws sts get-caller-identity'
             sh 'aws-iam-authenticator token -i eks-deploy'
-            sh 'aws eks describe-cluster --name eks-deploy --query cluster.status'
+            sh 'kubectl get nodes'
           }
 
         }
