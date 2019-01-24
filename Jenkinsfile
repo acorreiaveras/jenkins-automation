@@ -35,7 +35,7 @@ pipeline {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                 docker.image('sc-blessed').push(env.IMAGETAG+'-'+env.BUILD_ID) }
-                sh 'ansible-playbook /var/lib/jenkins/deployapp/deploy-myapp/deploy.yml  --user=jenkins --extra-vars ImageName=env.REPOSITORY --extra-vars imageTag=env.NAME'
+                sh 'ansible-playbook /var/lib/jenkins/deploy-myapp/deploy.yml  --user=jenkins --extra-vars ImageName=env.REPOSITORY --extra-vars imageTag=env.NAME'
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
