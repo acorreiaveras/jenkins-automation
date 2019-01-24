@@ -28,7 +28,7 @@ pipeline {
           script {
             env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
             env.KUBECONFIG = "/home/.kube/config"
-            sh '/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${env.REPOSITORY} --set image.tag=${env.NAME}'
+            sh '/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}'
           }
 
         }
