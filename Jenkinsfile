@@ -28,18 +28,14 @@ pipeline {
           script {
             env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
             env.KUBECONFIG = "/home/.kube/config"
-            print env.PATH
-            sh 'aws sts get-caller-identity'
-            sh 'aws-iam-authenticator token -i eks-deploy'
             sh 'aws eks update-kubeconfig --name eks-deploy'
-            sh 'kubectl get svc'
 
             $FLAG = sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
             if ($FLAG == '1') {
               sh 'docker tag smartcheck-registry sc-blessed'
               docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
                 docker.image('sc-blessed').push(env.IMAGETAG+'-'+env.BUILD_ID) }
-                sh '/usr/local/bin/helm install --name=myapp ../myapp --set image.repository={{ env.REPOSITORY }} --set image.tag={{ env.IMAGETAG }}'
+                sh '/usr/local/bin/helm install --name=myapp --set image.repository={{ env.REPOSITORY }} --set image.tag={{ env.IMAGETAG }}'
               } else {
                 sh 'docker tag smartcheck-registry sc-quarantined'
                 docker.withRegistry('https://102212442704.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:demo-ecr-credentials') {
