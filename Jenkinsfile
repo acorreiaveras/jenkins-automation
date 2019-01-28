@@ -30,7 +30,7 @@ pipeline {
             env.KUBECONFIG = "/home/.kube/config"
             $var = env.IMAGETAG+'-'+env.BUILD_ID
             sh 'echo ${NAME}'
-            sh 'echo $var'
+            sh 'echo ${var}'
           }
 
         }
