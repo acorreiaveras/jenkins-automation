@@ -28,9 +28,9 @@ pipeline {
           script {
             env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
             env.KUBECONFIG = "/home/.kube/config"
-            env.NAME = env.IMAGETAG+'-'+env.BUILD_ID
+            $var = env.IMAGETAG+'-'+env.BUILD_ID
             sh 'echo ${NAME}'
-            sh 'echo ${IMAGETAG}+'-'+${BUILD_ID}'
+            sh 'echo $var'
           }
 
         }
