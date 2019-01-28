@@ -35,9 +35,7 @@ pipeline {
 
               def NAME = env.IMAGETAG+'-'+env.BUILD_ID
 
-
-
-              sh 'helm upgrade --wait --recreate-pods newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}'
+              sh "/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
             }
 
           }
