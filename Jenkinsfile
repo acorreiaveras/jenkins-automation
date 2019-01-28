@@ -29,9 +29,8 @@ pipeline {
             env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
             env.KUBECONFIG = "/home/.kube/config"
             env.NAME = env.IMAGETAG+'-'+env.BUILD_ID
-            sh 'echo $env.NAME'
-            sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
-            sh '/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}'
+            sh 'echo ${NAME}'
+
           }
 
         }
