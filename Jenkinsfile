@@ -35,10 +35,12 @@ pipeline {
 
               def NAME = env.IMAGETAG+'-'+env.BUILD_ID
 
-
-              def FLAG = sh([ script: "/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}", returnStdout: true ]).trim()
-
-              sh "echo ${FLAG}"
+              try {
+                sh returnStdout: true, script: "/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
+              }
+              catch (exc) {
+                sh returnStdout: true, script: "helm upgrade --wait --recreate-pods newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
+              }
             }
 
           }
