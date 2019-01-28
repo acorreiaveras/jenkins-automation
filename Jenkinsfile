@@ -37,7 +37,7 @@ pipeline {
 
 
 
-              sh 'helm upgrade --wait --recreate-pods tomcat-svc /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}'
+              sh 'helm upgrade --wait --recreate-pods newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}'
             }
 
           }
