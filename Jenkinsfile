@@ -30,7 +30,8 @@ pipeline {
             env.KUBECONFIG = "/home/.kube/config"
             env.NAME = env.IMAGETAG+'-'+env.BUILD_ID
             sh 'echo $env.NAME'
-            sh '/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${env.NAME}'
+            sh([ script: 'python /home/scAPI.py', returnStdout: true ]).trim()
+            sh '/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}'
           }
 
         }
@@ -43,8 +44,8 @@ pipeline {
       LOW = '5'
       NEGLIGIBLE = '5'
       UNKNOWN = '5'
-      USER = 'administrator'
-      PASSWORD = 'trendmicro'
+      USER = 'credentials(\'smartcheck-credentials-username\')'
+      PASSWORD = 'credentials(\'smartcheck-credentials-password\')'
       REPOSITORY = '102212442704.dkr.ecr.us-west-1.amazonaws.com/sc-blessed'
       KUBECONFIG = '/home/.kube/config'
       NAMESPACE = 'default'
