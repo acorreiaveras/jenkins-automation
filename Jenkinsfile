@@ -28,8 +28,8 @@ pipeline {
           script {
             env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
             env.KUBECONFIG = "/home/.kube/config"
-            def var = env.IMAGETAG+'-'+env.BUILD_ID
-            sh "echo ${var}"
+            def NAME = env.IMAGETAG+'-'+env.BUILD_ID
+            sh "/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
           }
 
         }
@@ -47,6 +47,5 @@ pipeline {
       REPOSITORY = '102212442704.dkr.ecr.us-west-1.amazonaws.com/sc-blessed'
       KUBECONFIG = '/home/.kube/config'
       NAMESPACE = 'default'
-      NAME = 'name'
     }
   }
