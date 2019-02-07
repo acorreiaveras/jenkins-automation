@@ -43,17 +43,20 @@ pipeline {
         }
         stage('Deploy') {
           steps {
-            sh '''env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
-env.KUBECONFIG = "/home/.kube/config"
-sh \'aws eks update-kubeconfig --name eks-deploy\'
-def NAME = env.IMAGETAG+\'-\'+env.BUILD_ID
+            script {
+              env.PATH = "/usr/bin:/usr/local/bin:/home/bin:/home/ec2-user:${env.PATH}"
+              env.KUBECONFIG = "/home/.kube/config"
+              sh 'aws eks update-kubeconfig --name eks-deploy'
+              def NAME = env.IMAGETAG+'-'+env.BUILD_ID
 
-try {
-        sh returnStdout: true, script: "/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
-}
-catch (exc) {
-        sh returnStdout: true, script: "helm upgrade --wait --recreate-pods newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
-}'''
+              try {
+                sh returnStdout: true, script: "/usr/local/bin/helm install --name=newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
+              }
+              catch (exc) {
+                sh returnStdout: true, script: "helm upgrade --wait --recreate-pods newmyapp /home/myapp --set image.repository=${REPOSITORY} --set image.tag=${NAME}"
+              }
+            }
+
           }
         }
       }
