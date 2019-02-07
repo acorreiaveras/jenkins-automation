@@ -33,7 +33,7 @@ pipeline {
               docker.image('sc-blessed').push(NAME) }
             } else {
               currentBuild.result = 'FAILURE'
-              echo "${currentBuild.result}"
+              sh 'exit 1'
             }
           }
 
