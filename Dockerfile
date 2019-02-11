@@ -1,3 +1,1 @@
-FROM tomcat:8.5-jre8-alpine
-ADD sample.war /usr/local/tomcat/webapps/
-CMD ["catalina.sh", "run"]
+FROM piesecurity/apache-struts2-cve-2017-5638
