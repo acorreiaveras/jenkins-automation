@@ -70,8 +70,6 @@ pipeline {
         LOW = '5'
         NEGLIGIBLE = '5'
         UNKNOWN = '5'
-        USER = 'administrator'
-        PASSWORD = 'trendmicro'
         REPOSITORY = '102212442704.dkr.ecr.us-west-1.amazonaws.com/sc-blessed'
         KUBECONFIG = '/home/.kube/config'
         NAMESPACE = 'default'
