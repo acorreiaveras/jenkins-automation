@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Checkout') {
+    stage('Checkout GitHub') {
       steps {
         git 'https://github.com/acorreiaveras/jenkins-automation.git'
       }
@@ -23,7 +23,7 @@ pipeline {
 
         }
       }
-      stage('Smartcheck') {
+      stage('Smartcheck Scan') {
         steps {
           script {
             withCredentials([usernamePassword(credentialsId: 'smartcheck-credentials',
@@ -44,7 +44,7 @@ pipeline {
 
           }
         }
-        stage('Deploy') {
+        stage('Deploy to Production') {
           steps {
             script {
               sh 'echo Deployed to production'
