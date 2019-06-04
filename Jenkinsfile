@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy') {
           steps {
             script {
-              sh 'Deployed to production!'
+              sh 'echo Deployed to production'
             }
 
           }
