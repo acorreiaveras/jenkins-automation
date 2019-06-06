@@ -23,7 +23,7 @@ pipeline {
 
         }
       }
-      stage('Smartcheck Scan') {
+      stage('Smart Check') {
         steps {
           script {
             withCredentials([usernamePassword(credentialsId: 'smartcheck-credentials',
